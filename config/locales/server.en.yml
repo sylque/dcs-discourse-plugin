@@ -1,0 +1,10 @@
+en:
+  site_settings:
+    docuss_enabled: 'Enable the Docuss plugin'
+    docuss_website_json_file:
+      'Url of the json file describing the embedded website'
+    docuss_hide_sugg_topics:
+      'Hide suggested topics displayed at the bottom of Docuss topic pages'
+    docuss_hide_categories: 'Hide categories everywhere'
+    docuss_hide_tags: 'Hide tags everywhere'
+    docuss_hide_hamburger_menu: 'Hide the hamburger menu'

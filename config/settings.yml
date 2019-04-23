@@ -1,0 +1,19 @@
+plugins:
+  docuss_enabled:
+    default: false
+    client: true
+  docuss_website_json_file:
+    default: ''
+    client: true
+  docuss_hide_sugg_topics:
+    default: false
+    client: true
+  docuss_hide_categories:
+    default: false
+    client: true
+  docuss_hide_tags:
+    default: false
+    client: true
+  docuss_hide_hamburger_menu:
+    default: false
+    client: true

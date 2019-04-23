@@ -1,0 +1,364 @@
+/******************************************************************************/
+/* Convert to display flex, with 2 columns */
+/******************************************************************************/
+
+/* Remove default overflow-y: scroll in order to hide the full window vertical scrollbar */
+html.dcs2 {
+  overflow-y: hidden;
+}
+
+html.dcs2 body,
+html.dcs2 #main,
+html.dcs2 #main > .ember-view {
+  height: 100%;
+}
+
+html.dcs2 #dcs-row {
+  height: 100%;
+  padding-top: 60px;
+  box-sizing: border-box; /* Otherwise height will be 100% + 60px */
+  display: flex;
+}
+
+html.dcs2 #dcs-left,
+html.dcs2 #dcs-right {
+  flex: 1 0 0;
+  overflow-y: auto; /* Allow for a vertical scrollbar */
+  display: none;
+}
+
+/*******************************************************************************
+	Split bar
+*******************************************************************************/
+
+html.dcs2 #dcs-splitbar {
+  flex: 0 0 23px;
+  background-color: rgb(0, 111, 81);
+  flex-direction: column;
+  cursor: pointer;
+  display: none;
+  user-select: none; /* Prevent accidental selection of button text */
+}
+
+html.dcs2.dcs-tag #dcs-splitbar,
+html.dcs2.dcs-topic #dcs-splitbar {
+  display: flex;
+}
+
+html.dcs2.no-touch #dcs-splitbar:hover {
+  background-color: lightgrey;
+}
+
+html.dcs2 #dcs-splitbar-text {
+  color: white;
+  font-size: 28px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  /* Putting 1 instead of 0.9 causes a strange bug in Chrome, when hovering the right limit of the text */
+  transform: scale(0.9, 2.5);
+  text-align: center;
+}
+
+html.dcs2.no-touch #dcs-splitbar:hover #dcs-splitbar-text {
+  color: rgb(0, 111, 81);
+}
+
+/* Flip the > character to turn it to < */
+html.dcs2:not(.dcs-show-right) #dcs-splitbar-text {
+  transform: scale(-0.9, 2.5) !important;
+}
+
+/*******************************************************************************
+	Ghost
+*******************************************************************************/
+
+html.dcs2 #dcs-ghost {
+  position: fixed;
+  top: 60px;
+  left: 100%;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 1000;
+  animation-duration: 200ms;
+  animation-timing-function: linear;
+}
+
+html.dcs2 #dcs-ghost .dcs-ghost-splitbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 23px;
+  background-color: rgb(0, 111, 81);
+}
+
+/*******************************************************************************
+	Adapt Discourse to new layout
+*******************************************************************************/
+
+/* Disable centered header */
+html.dcs2 header.d-header .wrap {
+  margin: unset;
+  max-width: none;
+}
+
+/* Remove padding-top 82px which used to compensate for the fixed header height + margin */
+html.dcs2 #main-outlet {
+  padding-top: 22px;
+}
+
+/* In topic page, prevent avatar from going above post title */
+html.dcs2.dcs-topic .topic-body {
+  float: none;
+}
+
+/* In topic page, hide the navigation timeline when Discourse is hidden */
+/* This is required as the navigation has position:absolute */
+html.dcs2.dcs-topic:not(.dcs-show-right) #topic-progress-wrapper,
+html.dcs2.dcs-topic:not(.dcs-show-right) .timeline-container {
+  display: none;
+}
+
+/* YET ANOTHER COMPONENT WITH FIXED WIDTH */
+/* Mess with the horizontal scrollbar when reducing the screen width */
+/* NOT TESTED BECAUSE I DON'T KNOW HOW TO MAKE #group-card and #user-card 
+TO APPEAR */
+html.dcs2 #group-card,
+html.dcs2 #user-card {
+  width: auto;
+}
+
+/*******************************************************************************
+	Hide Docuss Tags
+*******************************************************************************/
+
+/* Hide dcs tags in tag filter dropdown */
+html.dcs2:not(.dcs-debug) li[data-name^='dcs-'] {
+  display: none;
+}
+
+/* Hide dcs tags in tag chooser */
+html.dcs2:not(.dcs-debug) .mini-tag-chooser > div[data-name^='dcs-'] > span,
+html.dcs2:not(.dcs-debug) .mini-tag-chooser .selected-tag[data-value^='dcs-'] {
+  display: none;
+}
+
+/* Hide dcs tags everywhere else */
+/* NOTICE THAT IT DOESN'T WORK WELL IN THE TAGS PAGE */
+html.dcs2:not(.dcs-debug) a.discourse-tag[data-tag-name^='dcs-'] {
+  display: none;
+}
+
+/*******************************************************************************
+	Hide categories (setting option)
+
+	Unfortunately, removing the category column entirely is not possible, because 
+	of this: https://meta.discourse.org/t/disabling-categories/12350/6?u=jack2
+*******************************************************************************/
+
+/* Hide the category column title
+Don't use visibility:hidden here, or it will  hide borders also. In admin mode,
+where there are categories (Staff, Lounge), this would create a hole in 
+the table's header */
+html.dcs2:not(.dcs-debug).dcs-disable-cats th.category {
+  /* The following line is better than opacity:0, because it reduces the column
+	width. Beware: the !important is important for the tag topic list */
+  font-size: 0pt !important;
+  pointer-events: none;
+  cursor: default;
+}
+
+html.dcs2:not(.dcs-debug).dcs-disable-cats a.badge-category,
+html.dcs2:not(.dcs-debug).dcs-disable-cats ul.category-links,
+html.dcs2:not(.dcs-debug).dcs-disable-cats ul.category-links + hr,
+html.dcs2:not(.dcs-debug).dcs-disable-cats div.category-input,
+html.dcs2:not(.dcs-debug).dcs-disable-cats div.category-chooser,
+html.dcs2:not(.dcs-debug).dcs-disable-cats ul#category-filter li:last-of-type,
+html.dcs2:not(.dcs-debug).dcs-disable-cats
+  .navigation-container
+  .category-breadcrumb
+  > li:first-child,
+html.dcs2:not(.dcs-debug).dcs-disable-cats
+  .navigation-container
+  li[title='all topics grouped by category'] {
+  display: none !important;
+}
+
+/* Hide category links in topic list footer. This will cause ugly bugs. For 
+example, "There are no more unread topics. Browse all categories or view latest 
+topics" will be turned into
+*/
+html.dcs2:not(.dcs-debug).dcs-disable-cats
+  footer.topic-list-bottom
+  a[href='/categories'] {
+  display: none;
+}
+
+/* When editing a topic, move back the text preview toward the bottom. This is
+required, cause the fact that we disabled categories and tags had removed
+input fields and now the text preview is too much toward the top
+*/
+html.dcs2:not(.dcs-debug).dcs-disable-cats .d-editor-preview-wrapper {
+  margin-top: 0px !important;
+}
+
+/*******************************************************************************
+	Hide the hamburger menu (setting option)
+*******************************************************************************/
+
+html.dcs2:not(.dcs-debug).dcs-no-ham-menu #toggle-hamburger-menu {
+  display: none;
+}
+
+/*******************************************************************************
+	Hide all tags (setting option)
+*******************************************************************************/
+/*
+html.dcs2:not(.dcs-debug).dcs-no-tags .list-tags,
+html.dcs2:not(.dcs-debug).dcs-no-tags li > a[Title='Tags'],
+html.dcs2:not(.dcs-debug).dcs-no-tags .tag-chooser,
+html.dcs2:not(.dcs-debug).dcs-no-tags .mini-tag-chooser,
+html.dcs2:not(.dcs-debug).dcs-no-tags .tag-show-heading {
+  display: none;
+}
+*/
+html.dcs2:not(.dcs-debug).dcs-no-tags .tag-drop,
+html.dcs2:not(.dcs-debug).dcs-no-tags .mini-tag-chooser,
+html.dcs2:not(.dcs-debug).dcs-no-tags .discourse-tag {
+  display: none;
+}
+
+/*******************************************************************************
+	In tag page
+*******************************************************************************/
+
+/* Hide category breadcrumb and "Latest/Top/Categories" menu */
+html.dcs2:not(.dcs-debug).dcs-tag
+  section.navigation-container
+  > .category-breadcrumb,
+html.dcs2:not(.dcs-debug).dcs-tag
+  section.navigation-container
+  > #navigation-bar {
+  display: none;
+}
+
+/* Hide tag breadcrumb */
+html.dcs2:not(.dcs-debug).dcs-tag
+  section.navigation-container
+  > .tag-show-heading {
+  display: none;
+}
+
+/* Hide the category in the composer. With Docuss, categories are set 
+through the embedded website descriptor, not by users */
+/* html.dcs2:not(.dcs-debug).dcs-tag .composer-fields .mini-tag-chooser */
+html.dcs2:not(.dcs-debug).dcs-tag .composer-fields .category-input {
+  display: none !important;
+}
+
+/* Specific case of the composer in a tag page with interactMode="COMMENT".
+The composer is for creating a new topic, but, in js, we have changed the 
+"+ Create Topic" button to "+ Add Comment"
+- hide the composer topic title, because the topic title is set in js
+- hide the composer header, including text "Create a new topic" (meaningless 
+because we are creating a comment, not a topic) and the menu (with the "create
+ a new personal message" item) 
+- hide the composer tag chooser field: the first user to post a comment (so, to 
+create the first topic) should not be able to add a tag. What could this be 
+for? */
+html.dcs2:not(.dcs-debug).dcs-tag.dcs-comment .composer-fields .title-input,
+html.dcs2:not(.dcs-debug).dcs-tag.dcs-comment .composer-fields .reply-details,
+html.dcs2:not(.dcs-debug).dcs-tag.dcs-comment
+  .composer-fields
+  .mini-tag-chooser {
+  display: none !important;
+}
+html.dcs2:not(.dcs-debug).dcs-tag.dcs-comment
+  .edit-title
+  .d-editor-preview-wrapper {
+  margin-top: 0px; /* Remove the negative top margin that was supposed to compensate for the header */
+}
+
+/*******************************************************************************
+	In topic page
+*******************************************************************************/
+
+/* Hide the "Want to read more?" footer */
+html.dcs2:not(.dcs-debug).dcs-topic .suggested-topics-message {
+  display: none;
+}
+
+/* Remove the "suggested topics" footer area (settings option) */
+html.dcs2:not(.dcs-debug).dcs-topic.dcs-disable-sugg #suggested-topics {
+  display: none;
+}
+
+/* Disable "share" buttons in each posts and at the bottom of the topic page, 
+as it show a discourse link to an individual topic or post WITHOUT THE DOCUSS
+QUERY PARAMS. The user can copy the address bar anyway */
+/*
+html.dcs2:not(.dcs-debug).dcs-topic button.share {
+  display: none;
+}
+*/
+
+/* Disable the date link, which also opens a dialog with a direct link
+to an individual topic or post WITHOUT THE DOCUSS
+QUERY PARAMS. The user can copy the address bar anyway */
+/*
+html.dcs2:not(.dcs-debug).dcs-topic a.post-date {
+  pointer-events: none;
+}
+*/
+
+/* Hide the topic category: it makes no sense to show it, as the topic relates
+to the selected trigger ot the page on the left, not to a category */
+html.dcs2:not(.dcs-debug).dcs-topic .topic-category > .badge-wrapper {
+  display: none;
+}
+html.dcs2:not(.dcs-debug).dcs-topic .topic-category {
+  min-height: 10px;
+}
+
+/* Specific case of a topic page with interactMode="COMMENT": hide the topic 
+title  */
+html.dcs2:not(.dcs-debug).dcs-topic.dcs-comment #topic-title {
+  display: none;
+}
+
+/* Specific case of the composer in a topic page with interactMode="COMMENT": 
+The composer is for creating a new post (answer).
+- hide the hedare, as it show the automatically set title*/
+html.dcs2:not(.dcs-debug).dcs-topic.dcs-comment
+  .composer-fields
+  .reply-details {
+  display: none !important;
+}
+
+/* Specific case of a topic page with interactMode="COMMENT": move the 
+topic-map from behind the first post to above the first post */
+html.dcs2:not(.dcs-debug).dcs-topic.dcs-comment .topic-map {
+  position: absolute;
+  top: -150px;
+  left: 0px;
+  right: 0px;
+  z-index: 3;
+}
+
+/* Specific case of a topic page with interactMode="COMMENT": prevent title
+edition by hidding the edit icon. Hidding the icon is meaningless in the default
+case, because the title is hidden anyway. But it is useful if a trigger 
+Discourse itself has been set by the client */
+html.dcs2:not(.dcs-debug).dcs-topic.dcs-comment .edit-topic {
+  display: none;
+}
+
+/* Specific case of a topic page with interactMode="COMMENT": style of the
+docuss title prefix */
+html.dcs2:not(.dcs-debug).dcs-topic.dcs-discuss
+  .fancy-title
+  > .dcs-title-prefix {
+  color: lightgrey;
+  font-size: 80%;
+}

@@ -62,8 +62,8 @@ settings:
 - `min trust to create tag` &rightarrow; `0: new user`
 - `allow duplicate topic titles` &rightarrow; checked
 - `docuss enabled` &rightarrow; checked
-- `docuss emb website descr` &rightarrow; url of a json file describing your
-  website or web app.
+- `docuss website json file` &rightarrow; one or several urls, each one pointing
+  to a json file describing a website or web app.
 
 If your Discourse instance doesn't use tags (i.e. if `tagging enabled` was
 unchecked before you checked it as part of this setup), set this additional
@@ -109,6 +109,16 @@ Just use the fact that, whether from a Discourse menu or from your website:
 - `http://www.mydiscourse.org/docuss/[pageName]` points to one of your website's
   page,
 - `http://www.mydiscourse.org/latest` points to your forum.
+
+## Additional Plugin Settings
+
+- `docuss hide sugg topics`: hide suggested topics displayed at the bottom of
+  Docuss topic pages.
+- `docuss hide categories`: hide categories everywhere in Discourse. Notice that
+  you can also set "header dropdown category count" to 0 to hide categories in
+  the hamburger menu alone.
+- `docuss hide tags`: hide tags everywhere in Discourse.
+- `docuss hide hamburger menu`: hide the Discourse hamburger menu.
 
 ## License
 

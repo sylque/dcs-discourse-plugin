@@ -1,19 +1,26 @@
 plugins:
   docuss_enabled:
-    default: false
+    refresh: true
     client: true
+    default: false
   docuss_website_json_file:
+    refresh: true
+    client: true
+    type: list
     default: ''
-    client: true
   docuss_hide_sugg_topics:
-    default: false
+    refresh: true
     client: true
+    default: false
   docuss_hide_categories:
-    default: false
+    refresh: true
     client: true
+    default: false
   docuss_hide_tags:
-    default: false
+    refresh: true
     client: true
+    default: false
   docuss_hide_hamburger_menu:
-    default: false
+    refresh: true
     client: true
+    default: false

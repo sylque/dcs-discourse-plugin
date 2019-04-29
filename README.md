@@ -1,6 +1,6 @@
 # dcs-discourse-plugin2
 
-A Discourse plugin that allows to integrate your website or web app within
+A Discourse plugin that allows to integrate your website or web app with
 Discourse.
 
 ## Demos
@@ -55,15 +55,17 @@ hooks:
 
 ### 2. Set Discourse settings
 
-In the Discourse Admin panel, open the Settings page and set the following
-settings:
+In the Discourse Admin panel, open the Settings page and set those settings:
 
 - `tagging enabled` &rightarrow; checked
 - `min trust to create tag` &rightarrow; `0: new user`
 - `allow duplicate topic titles` &rightarrow; checked
 - `docuss enabled` &rightarrow; checked
 - `docuss website json file` &rightarrow; one or several urls, each one pointing
-  to a json file describing a website or web app.
+  to a json file describing a website or web app. The structure of the file is
+  described [here](https://github.com/sylque/dcs-website-schema). If you are new
+  to Docuss and just want to see if the plugin works correctly, enter this url:
+  `http://localhost:8080/demos/mustacchio/dcs-website.json`.
 
 If your Discourse instance doesn't use tags (i.e. if `tagging enabled` was
 unchecked before you checked it as part of this setup), set this additional
@@ -83,13 +85,6 @@ Discourse will ask if you want to create them: answer yes.
 ~~Now you can safely delete the topic if you want, the tags will remain~~. Nope,
 sometimes it doesn't work. You better keep the topic.
 
-## The JSON Description File
-
-[Under construction]
-
-Be sure to validate you JSON file using the
-[Website Description File Validator](https://sylque.github.io/dcs-website-schema/public/validate.html).
-
 ## Website Navigation
 
 Now that your website is displayed within Discourse, you might want to
@@ -97,7 +92,7 @@ reconsider your navigation/menu system. You can keep it in your website, you can
 move it to Discourse, or you can do a bit of both.
 
 At the very minimum, in your website, you need to update the links to your
-forum. Change them all to `http://www.mydiscourse.org/latest` (instead of
+forum. Change them to `http://www.mydiscourse.org/latest` (instead of
 `http://www.mydiscourse.org`).
 
 Discourse custom navigation is out of the scope of this plugin. To learn more

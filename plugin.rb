@@ -1,6 +1,6 @@
 # name: docuss
 # about: a plugin for Discourse
-# version: 1.0.3
+# version: 1.0.4
 # authors: Sylvain Quendez
 
 # When styles are not working or are not updating, try:

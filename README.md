@@ -65,7 +65,7 @@ In the Discourse Admin panel, open the Settings page and set those settings:
   to a json file describing a website or web app. The structure of the file is
   described [here](https://github.com/sylque/dcs-website-schema). If you are new
   to Docuss and just want to see if the plugin works correctly, enter this url:
-  `http://localhost:8080/demos/mustacchio/dcs-website.json`.
+  `https://sylque.github.io/dcs-client/demos/mustacchio/dcs-website.json`.
 
 If your Discourse instance doesn't use tags (i.e. if `tagging enabled` was
 unchecked before you checked it as part of this setup), set this additional

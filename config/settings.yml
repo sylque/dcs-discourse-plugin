@@ -24,3 +24,7 @@ plugins:
     refresh: true
     client: true
     default: false
+  docuss_proxy_url:
+    refresh: true
+    client: true
+    default: ''

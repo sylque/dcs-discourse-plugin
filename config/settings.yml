@@ -24,6 +24,10 @@ plugins:
     refresh: true
     client: true
     default: false
+  docuss_iframe_attributes:
+    refresh: true
+    client: true
+    default: ''
   docuss_proxy_url:
     refresh: true
     client: true

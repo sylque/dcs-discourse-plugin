@@ -115,6 +115,15 @@ Just use the fact that, whether from a Discourse menu or from your website:
 - `docuss hide tags`: hide tags everywhere in Discourse.
 - `docuss hide hamburger menu`: hide the Discourse hamburger menu.
 
+## FAQ
+
+>When I create a topic for a Docuss page, the `category` field is hidden. Why is that?
+
+User cannot select a category from a Docuss page. Categories are applied automatically by Docuss, depending on webmaster predefined choices. The way webmasters define categories depends on the Docuss Client library they use:
+- `comToPlugin.js`: see [here](https://github.com/sylque/dcs-client/blob/master/comToPlugin.md#set-the-route-properties)
+- `dcs-html-based.js`: see [here](https://github.com/sylque/dcs-client/blob/master/dcs-html-based.md)
+- `dcs-decorator.js`: see [here](https://github.com/sylque/dcs-website-schema#file-format-reference) (search the page for "category")
+
 ## License
 
 See [here](https://github.com/sylque/docuss#license).

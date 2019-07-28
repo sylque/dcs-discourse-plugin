@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 
-import { initialize } from '../lib/lib'
+import { init } from '../lib/lib'
 
 //------------------------------------------------------------------------------
 
 export default {
   name: 'docuss',
   initialize(container, app) {
-    initialize(container, app)
+    init(container, app)
   }
 }

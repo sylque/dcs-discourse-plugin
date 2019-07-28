@@ -1,29 +1,79 @@
-/******************************************************************************/
-/* Convert to display flex, with 2 columns */
-/******************************************************************************/
+/*******************************************************************************
+	Adapt Discourse to Docuss layouts
+*******************************************************************************/
 
-/* Remove default overflow-y: scroll in order to hide the full window vertical scrollbar */
-html.dcs2 {
-  overflow-y: hidden;
+/* Disable centered header */
+html.dcs2 header.d-header .wrap {
+  margin: unset;
+  max-width: none;
 }
 
-html.dcs2 body,
-html.dcs2 #main,
-html.dcs2 #main > .ember-view {
-  height: 100%;
+html.dcs2[dcs-layout="0"],
+html.dcs2[dcs-layout="2"] {
+    overflow-y: hidden;
+}
+/*
+Don't do that. Discourse default behavior is to keep the scroll bar greyed out,
+which is nice because it prevents jerks when window width changes
+html.dcs2[dcs-layout="3"] {
+    overflow-y: auto;
+}
+*/
+
+/*******************************************************************************
+	Right
+*******************************************************************************/
+
+html.dcs2[dcs-layout="0"] #dcs-right,
+html.dcs2[dcs-layout="2"] #dcs-right {
+    display: none;
 }
 
-html.dcs2 #dcs-row {
-  height: 100%;
-  padding-top: 60px;
-  box-sizing: border-box; /* Otherwise height will be 100% + 60px */
+html.dcs2[dcs-layout="3"] #dcs-right {
+  padding-left: 23px;
+}
+html.dcs2[dcs-layout="3"].dcs-wide #dcs-right {
+  padding-left: 50%;
+}
+
+/*******************************************************************************
+	Container
+*******************************************************************************/
+
+/* For layout 0 and 2 */
+html.dcs2 #dcs-container {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
+  z-index: 100;
 }
 
-html.dcs2 #dcs-left,
-html.dcs2 #dcs-right {
-  flex: 1 0 0;
-  overflow-y: auto; /* Allow for a vertical scrollbar */
+/* For layout 1 */
+html.dcs2[dcs-layout="1"] #dcs-container {
+  right: 100%;
+}
+
+/* For layout 3 */
+html.dcs2[dcs-layout="3"] #dcs-container {
+  right: 23px;
+}
+html.dcs2[dcs-layout="3"].dcs-wide #dcs-container {
+  right: 50%;
+}
+
+/*******************************************************************************
+	Left
+*******************************************************************************/
+
+html.dcs2 #dcs-left {
+  flex: 1 0 0px;
+  overflow: hidden;
+}
+
+html.dcs2[dcs-layout="3"]:not(.dcs-wide) #dcs-left {
   display: none;
 }
 
@@ -40,8 +90,8 @@ html.dcs2 #dcs-splitbar {
   user-select: none; /* Prevent accidental selection of button text */
 }
 
-html.dcs2.dcs-tag #dcs-splitbar,
-html.dcs2.dcs-topic #dcs-splitbar {
+html.dcs2[dcs-layout="2"] #dcs-splitbar,
+html.dcs2[dcs-layout="3"] #dcs-splitbar {
   display: flex;
 }
 
@@ -64,7 +114,7 @@ html.dcs2.no-touch #dcs-splitbar:hover #dcs-splitbar-text {
 }
 
 /* Flip the > character to turn it to < */
-html.dcs2:not(.dcs-layout-3) #dcs-splitbar-text {
+html.dcs2:not([dcs-layout="3"]) #dcs-splitbar-text {
   transform: scale(-0.9, 2.5) !important;
 }
 
@@ -91,42 +141,6 @@ html.dcs2 #dcs-ghost .dcs-ghost-splitbar {
   bottom: 0;
   width: 23px;
   background-color: rgb(0, 111, 81);
-}
-
-/*******************************************************************************
-	Adapt Discourse to new layout
-*******************************************************************************/
-
-/* Disable centered header */
-html.dcs2 header.d-header .wrap {
-  margin: unset;
-  max-width: none;
-}
-
-/* Remove padding-top 82px which used to compensate for the fixed header height + margin */
-html.dcs2 #main-outlet {
-  padding-top: 22px;
-}
-
-/* In topic page, prevent avatar from going above post title */
-html.dcs2.dcs-topic .topic-body {
-  float: none;
-}
-
-/* In topic page, hide the navigation timeline when Discourse is hidden */
-/* This is required as the navigation has position:absolute */
-html.dcs2.dcs-topic:not(.dcs-layout-3) #topic-progress-wrapper,
-html.dcs2.dcs-topic:not(.dcs-layout-3) .timeline-container {
-  display: none;
-}
-
-/* YET ANOTHER COMPONENT WITH FIXED WIDTH */
-/* Mess with the horizontal scrollbar when reducing the screen width */
-/* NOT TESTED BECAUSE I DON'T KNOW HOW TO MAKE #group-card and #user-card 
-TO APPEAR */
-html.dcs2 #group-card,
-html.dcs2 #user-card {
-  width: auto;
 }
 
 /*******************************************************************************
@@ -214,18 +228,10 @@ html.dcs2:not(.dcs-debug).dcs-no-ham-menu #toggle-hamburger-menu {
 /*******************************************************************************
 	Hide all tags (setting option)
 *******************************************************************************/
-/*
-html.dcs2:not(.dcs-debug).dcs-no-tags .list-tags,
-html.dcs2:not(.dcs-debug).dcs-no-tags li > a[Title='Tags'],
-html.dcs2:not(.dcs-debug).dcs-no-tags .tag-chooser,
-html.dcs2:not(.dcs-debug).dcs-no-tags .mini-tag-chooser,
-html.dcs2:not(.dcs-debug).dcs-no-tags .tag-show-heading {
-  display: none;
-}
-*/
-html.dcs2:not(.dcs-debug).dcs-no-tags .tag-drop,
-html.dcs2:not(.dcs-debug).dcs-no-tags .mini-tag-chooser,
-html.dcs2:not(.dcs-debug).dcs-no-tags .discourse-tag {
+
+html.dcs2:not(.dcs-debug).dcs-hide-tags .tag-drop,
+html.dcs2:not(.dcs-debug).dcs-hide-tags .mini-tag-chooser,
+html.dcs2:not(.dcs-debug).dcs-hide-tags .discourse-tag {
   display: none;
 }
 
@@ -256,6 +262,12 @@ through the embedded website descriptor, not by users */
 html.dcs2:not(.dcs-debug).dcs-tag .composer-fields .category-input {
   display: none !important;
 }
+html.dcs2:not(.dcs-debug).dcs-tag .d-editor-preview-wrapper {
+  /* Because categories and tag fields are now hidden, margin-top is wrong and 
+  the composer preview overlaps (and disables) the top-right buttons. So we need 
+  to restore margin-top as-if there was no .with-tags class. */
+  margin-top: -43px;
+}
 
 /* Specific case of the composer in a tag page with interactMode="COMMENT".
 The composer is for creating a new topic, but, in js, we have changed the 
@@ -284,6 +296,12 @@ html.dcs2:not(.dcs-debug).dcs-tag.dcs-comment
 	In topic page
 *******************************************************************************/
 
+/* Disable topic fix width */
+html.dcs2:not(.dcs-debug).dcs-topic .post-stream .topic-body {
+  width: auto;
+  float: none;
+}
+
 /* Hide the "Want to read more?" footer */
 html.dcs2:not(.dcs-debug).dcs-topic .suggested-topics-message {
   display: none;
@@ -293,24 +311,6 @@ html.dcs2:not(.dcs-debug).dcs-topic .suggested-topics-message {
 html.dcs2:not(.dcs-debug).dcs-topic.dcs-disable-sugg #suggested-topics {
   display: none;
 }
-
-/* Disable "share" buttons in each posts and at the bottom of the topic page, 
-as it show a discourse link to an individual topic or post WITHOUT THE DOCUSS
-QUERY PARAMS. The user can copy the address bar anyway */
-/*
-html.dcs2:not(.dcs-debug).dcs-topic button.share {
-  display: none;
-}
-*/
-
-/* Disable the date link, which also opens a dialog with a direct link
-to an individual topic or post WITHOUT THE DOCUSS
-QUERY PARAMS. The user can copy the address bar anyway */
-/*
-html.dcs2:not(.dcs-debug).dcs-topic a.post-date {
-  pointer-events: none;
-}
-*/
 
 /* Hide the topic category: it makes no sense to show it, as the topic relates
 to the selected trigger ot the page on the left, not to a category */
@@ -362,3 +362,75 @@ html.dcs2:not(.dcs-debug).dcs-topic.dcs-discuss
   color: lightgrey;
   font-size: 80%;
 }
+
+
+
+
+
+
+
+
+
+
+/*############################################################################*/
+
+
+/* Remove padding-top 82px which used to compensate for the fixed header height + margin */
+html.dcs3 #main-outlet {
+  padding-top: 22px;
+}
+
+/* In topic page, prevent avatar from going above post title */
+html.dcs3.dcs-topic .topic-body {
+  float: none;
+}
+
+/* In topic page, hide the navigation timeline when Discourse is hidden */
+/* This is required as the navigation has position:absolute */
+/*
+html.dcs3.dcs-topic:not([dcs-layout="3"]) #topic-progress-wrapper,
+html.dcs3.dcs-topic:not([dcs-layout="3"]) .timeline-container {
+  display: none;
+}
+*/
+
+/* YET ANOTHER COMPONENT WITH FIXED WIDTH */
+/* Mess with the horizontal scrollbar when reducing the screen width */
+/* NOT TESTED BECAUSE I DON'T KNOW HOW TO MAKE #group-card and #user-card 
+TO APPEAR */
+html.dcs3 #group-card,
+html.dcs3 #user-card {
+  width: auto;
+}
+
+
+
+/******************************************************************************/
+/* Convert to display flex, with 2 columns */
+/******************************************************************************/
+
+/* Remove default overflow-y: scroll in order to hide the full window vertical scrollbar */
+html.dcs3 {
+  overflow-y: hidden;
+}
+
+html.dcs3 body,
+html.dcs3 #main,
+html.dcs3 #main > .ember-view {
+  height: 100%;
+}
+
+html.dcs3 #dcs-row {
+  height: 100%;
+  padding-top: 60px;
+  box-sizing: border-box; /* Otherwise height will be 100% + 60px */
+  display: flex;
+}
+
+html.dcs3 #dcs-left,
+html.dcs3 #dcs-right {
+  flex: 1 0 0;
+  overflow-y: auto; /* Allow for a vertical scrollbar */
+  display: none;
+}
+

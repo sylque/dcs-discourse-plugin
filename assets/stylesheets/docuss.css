@@ -58,7 +58,7 @@ html.dcs2[dcs-layout="1"] #dcs-container {
 
 /* For layout 3 */
 html.dcs2[dcs-layout="3"] #dcs-container {
-  right: 23px;
+  right: calc(100% - 23px);
 }
 html.dcs2[dcs-layout="3"].dcs-wide #dcs-container {
   right: 50%;

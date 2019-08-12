@@ -49,6 +49,7 @@ html.dcs2 #dcs-container {
   bottom: 0;
   display: flex;
   z-index: 100;
+  overflow: hidden; /* Required to hide the #dcs-ios-wrapper when hidden */
 }
 
 /* For layout 1 */
@@ -67,6 +68,15 @@ html.dcs2[dcs-layout="3"].dcs-wide #dcs-container {
 /*******************************************************************************
 	Left
 *******************************************************************************/
+
+/* Fix for "iOs: no scrolling in iframe". See:
+https://stackoverflow.com/questions/43262156/cant-scroll-iframe-on-mobile-ios-safari */
+html.dcs2 #dcs-ios-wrapper {
+  flex: 1 0 auto;
+  display: flex;
+  overflow: auto; /* For iOs iframe scrolling */
+  -webkit-overflow-scrolling: touch; /* For iOs iframe scrolling */
+}
 
 html.dcs2 #dcs-left {
   flex: 1 0 0px;

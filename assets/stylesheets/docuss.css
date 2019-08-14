@@ -6,11 +6,15 @@
 html.dcs2 header.d-header .wrap {
   margin: unset;
   max-width: none;
+  /* With max-width:none, the hamburger menu is now sticked to the right side 
+  of the window. Unfortunately, when opened, the hamburger menu goes outside of 
+  the right side of the window. So we need to increase x-padding from 8px to 10px */
+  padding: 0px 10px;
 }
 
-html.dcs2[dcs-layout="0"],
-html.dcs2[dcs-layout="2"] {
-    overflow-y: hidden;
+html.dcs2[dcs-layout='0'],
+html.dcs2[dcs-layout='2'] {
+  overflow-y: hidden;
 }
 /*
 Don't do that. Discourse default behavior is to keep the scroll bar greyed out,
@@ -24,15 +28,15 @@ html.dcs2[dcs-layout="3"] {
 	Right
 *******************************************************************************/
 
-html.dcs2[dcs-layout="0"] #dcs-right,
-html.dcs2[dcs-layout="2"] #dcs-right {
-    display: none;
+html.dcs2[dcs-layout='0'] #dcs-right,
+html.dcs2[dcs-layout='2'] #dcs-right {
+  display: none;
 }
 
-html.dcs2[dcs-layout="3"] #dcs-right {
+html.dcs2[dcs-layout='3'] #dcs-right {
   padding-left: 23px;
 }
-html.dcs2[dcs-layout="3"].dcs-wide #dcs-right {
+html.dcs2[dcs-layout='3'].dcs-wide #dcs-right {
   padding-left: 50%;
 }
 
@@ -53,15 +57,15 @@ html.dcs2 #dcs-container {
 }
 
 /* For layout 1 */
-html.dcs2[dcs-layout="1"] #dcs-container {
+html.dcs2[dcs-layout='1'] #dcs-container {
   right: 100%;
 }
 
 /* For layout 3 */
-html.dcs2[dcs-layout="3"] #dcs-container {
+html.dcs2[dcs-layout='3'] #dcs-container {
   right: calc(100% - 23px);
 }
-html.dcs2[dcs-layout="3"].dcs-wide #dcs-container {
+html.dcs2[dcs-layout='3'].dcs-wide #dcs-container {
   right: 50%;
 }
 
@@ -83,7 +87,7 @@ html.dcs2 #dcs-left {
   overflow: hidden;
 }
 
-html.dcs2[dcs-layout="3"]:not(.dcs-wide) #dcs-left {
+html.dcs2[dcs-layout='3']:not(.dcs-wide) #dcs-left {
   display: none;
 }
 
@@ -100,8 +104,8 @@ html.dcs2 #dcs-splitbar {
   user-select: none; /* Prevent accidental selection of button text */
 }
 
-html.dcs2[dcs-layout="2"] #dcs-splitbar,
-html.dcs2[dcs-layout="3"] #dcs-splitbar {
+html.dcs2[dcs-layout='2'] #dcs-splitbar,
+html.dcs2[dcs-layout='3'] #dcs-splitbar {
   display: flex;
 }
 
@@ -124,7 +128,7 @@ html.dcs2.no-touch #dcs-splitbar:hover #dcs-splitbar-text {
 }
 
 /* Flip the > character to turn it to < */
-html.dcs2:not([dcs-layout="3"]) #dcs-splitbar-text {
+html.dcs2:not([dcs-layout='3']) #dcs-splitbar-text {
   transform: scale(-0.9, 2.5) !important;
 }
 
@@ -373,17 +377,7 @@ html.dcs2:not(.dcs-debug).dcs-topic.dcs-discuss
   font-size: 80%;
 }
 
-
-
-
-
-
-
-
-
-
 /*############################################################################*/
-
 
 /* Remove padding-top 82px which used to compensate for the fixed header height + margin */
 html.dcs3 #main-outlet {
@@ -413,8 +407,6 @@ html.dcs3 #user-card {
   width: auto;
 }
 
-
-
 /******************************************************************************/
 /* Convert to display flex, with 2 columns */
 /******************************************************************************/
@@ -443,4 +435,3 @@ html.dcs3 #dcs-right {
   overflow-y: auto; /* Allow for a vertical scrollbar */
   display: none;
 }
-

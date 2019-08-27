@@ -75,12 +75,23 @@ html.dcs2[dcs-layout='3'].dcs-wide #dcs-container {
 
 /* Fix for "iOs: no scrolling in iframe". See:
 https://stackoverflow.com/questions/43262156/cant-scroll-iframe-on-mobile-ios-safari */
-html.dcs2 #dcs-ios-wrapper {
+html.dcs2 #dcs-ios-wrapper {    
   flex: 1 0 auto;
   display: flex;
   overflow: auto; /* For iOs iframe scrolling */
   -webkit-overflow-scrolling: touch; /* For iOs iframe scrolling */
 }
+
+/* Fix for "iOS: wrong iframe content size". See:
+https://stackoverflow.com/questions/23083462/how-to-get-an-iframe-to-be-responsive-in-ios-safari
+DOESN'T ::-webkit-scrollbar-track
+*/
+/*
+html.dcs2 #dcs-ios-wrapper > iframe {
+  width: 1px;
+  min-width: 100%;  
+}
+*/
 
 html.dcs2 #dcs-left {
   flex: 1 0 0px;

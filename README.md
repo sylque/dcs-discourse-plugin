@@ -1,4 +1,4 @@
-# dcs-discourse-plugin2
+# dcs-discourse-plugin
 
 A Discourse plugin that allows to integrate your website or web app with
 Discourse.
@@ -14,7 +14,7 @@ See [here](https://github.com/sylque/docuss).
 The plugin’s repository url is:
 
 ```
-https://github.com/sylque/dcs-discourse-plugin2.git
+https://github.com/sylque/dcs-discourse-plugin.git
 ```
 
 Step by step guide, based on Discourse
@@ -34,7 +34,7 @@ hooks:
            - git clone https://github.com/discourse/docker_manager.git
 ```
 
-5. Paste `- git clone https://github.com/sylque/dcs-discourse-plugin2.git`
+5. Paste `- git clone https://github.com/sylque/dcs-discourse-plugin.git`
    beneath that, so that all together it looks like this:
 
 ```
@@ -44,7 +44,7 @@ hooks:
         cd: $home/plugins
         cmd:
            - git clone https://github.com/discourse/docker_manager.git
-           - git clone https://github.com/sylque/dcs-discourse-plugin2.git
+           - git clone https://github.com/sylque/dcs-discourse-plugin.git
 ```
 
 6. Hit `control + O` then Enter (to save `app.yml`)

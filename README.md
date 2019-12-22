@@ -1,7 +1,7 @@
 # dcs-discourse-plugin
 
 A Discourse plugin that allows to integrate your website or web app with
-Discourse.
+Discourse. Part of the [Docuss](https://github.com/sylque/docuss) solution.
 
 ## Demos
 

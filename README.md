@@ -117,6 +117,23 @@ Just use the fact that, whether from a Discourse menu or from your website:
 - `docuss hide tags`: hide tags everywhere in Discourse.
 - `docuss hide hamburger menu`: hide the Discourse hamburger menu.
 
+## Known limitations when using tags
+
+Docuss relies on automatically generated tags to achieve its magic (generated
+tags are of the form `dcs-xxxxxx-xxxxxx`). That is why, to be on the safe side,
+it is advised _not_ to use tags in your Discourse community and set the above
+`docuss hide tags` setting to true. To ease your decision, consider that Docuss
+is a new way of categorizing topics ("per balloon", instead of "per category" or
+"per tag"), so maybe tags are unnecessary with Docuss anyway.
+
+However, if you decide to use tags in your Discourse community, Docuss will try
+its best to hide its automatically generated tags. One area where Docuss doesn't
+do a good job is the `tags` page, where Docuss tags will appear blank instead of
+being hidden.
+
+As an administrator, when troubleshooting tag issues, press `Alt+a` to disable
+Docuss CSS and thus showing Docuss tags.
+
 ## FAQ
 
 > When I create a topic for a Docuss page, the `category` field is hidden. Why

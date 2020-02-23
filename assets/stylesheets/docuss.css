@@ -212,7 +212,7 @@ html.dcs2:not(.dcs-debug).dcs-disable-cats a.badge-category,
 html.dcs2:not(.dcs-debug).dcs-disable-cats ul.category-links,
 html.dcs2:not(.dcs-debug).dcs-disable-cats ul.category-links + hr,
 html.dcs2:not(.dcs-debug).dcs-disable-cats div.category-input,
-html.dcs2:not(.dcs-debug).dcs-disable-cats div.category-chooser,
+html.dcs2:not(.dcs-debug).dcs-disable-cats body:not(.admin-interface) div.category-chooser,
 html.dcs2:not(.dcs-debug).dcs-disable-cats ul#category-filter li:last-of-type,
 html.dcs2:not(.dcs-debug).dcs-disable-cats
   .navigation-container
@@ -354,7 +354,7 @@ html.dcs2:not(.dcs-debug).dcs-topic.dcs-comment #topic-title {
 
 /* Specific case of the composer in a topic page with interactMode="COMMENT": 
 The composer is for creating a new post (answer).
-- hide the hedare, as it show the automatically set title*/
+- hide the header, as it show the automatically set title */
 html.dcs2:not(.dcs-debug).dcs-topic.dcs-comment
   .composer-fields
   .reply-details {

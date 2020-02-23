@@ -19,6 +19,10 @@ register_asset "stylesheets/docuss.css"
 # Register admin settings
 enabled_site_setting :docuss_enabled
 
+# Required for Bellhop to run, as it uses Babel regeneratorRuntime
+# See https://github.com/mozilla/pdf.js/issues/11036
+extend_content_security_policy(script_src: [:unsafe_eval])
+
 # Changes X-Frame-Options so the site can be embedded in an iframe. See:
 # https://github.com/BeXcellent/discourse-allowiframe/blob/master/plugin.rb
 # https://github.com/TheBunyip/discourse-allow-same-origin/blob/master/plugin.rb

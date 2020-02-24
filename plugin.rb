@@ -1,6 +1,6 @@
 # name: docuss
 # about: Docuss plugin for Discourse
-# version: 1.0.23
+# version: 1.0.24
 # authors: Sylvain Quendez
 
 # When styles are not working or are not updating, try:
@@ -19,8 +19,9 @@ register_asset "stylesheets/docuss.css"
 # Register admin settings
 enabled_site_setting :docuss_enabled
 
-# Required for Bellhop to run, as it uses Babel regeneratorRuntime
-# See https://github.com/mozilla/pdf.js/issues/11036
+# Required for Bellhop to run, as it uses Babel regeneratorRuntime. See:
+# https://github.com/mozilla/pdf.js/issues/11036
+# https://github.com/ianstormtaylor/slate/issues/3242
 extend_content_security_policy(script_src: [:unsafe_eval])
 
 # Changes X-Frame-Options so the site can be embedded in an iframe. See:

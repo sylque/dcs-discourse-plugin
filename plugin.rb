@@ -1,7 +1,8 @@
 # name: docuss
 # about: Docuss plugin for Discourse
-# version: 1.0.24
+# version: 1.0.25
 # authors: Sylvain Quendez
+# url: https://github.com/sylque/dcs-discourse-plugin
 
 # When styles are not working or are not updating, try:
 # - stopping server

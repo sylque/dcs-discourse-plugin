@@ -1,6 +1,6 @@
 # name: docuss
 # about: Docuss plugin for Discourse
-# version: 1.0.27
+# version: 1.0.28
 # authors: Sylvain Quendez
 # url: https://github.com/sylque/dcs-discourse-plugin
 

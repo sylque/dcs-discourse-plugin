@@ -3,6 +3,8 @@
 A Discourse plugin that allows to integrate your website or web app with
 Discourse. Part of the [Docuss](https://github.com/sylque/docuss) solution.
 
+**This project is not active anymore.** Fixes are provided to existing users, but I stopped working on new features. You might want to check  [DiscPage](https://github.com/sylque/discpage), which is somehow a simplified version of Docuss.
+
 ## Demos
 
 See [here](https://github.com/sylque/docuss).

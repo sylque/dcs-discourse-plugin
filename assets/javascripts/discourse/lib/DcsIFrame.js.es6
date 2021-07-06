@@ -51,7 +51,7 @@ export class DcsIFrame {
 		}
 		const jsonUrls = jsonUrlsStr
 			.split('|')
-			.filter(url => !url.startsWith('DISABLE'))
+			.filter(url => url.trim() && !url.startsWith('DISABLE'))
 		if (!jsonUrls.length) {
 			this._displayError(
 				'Error in Discourse settings',
